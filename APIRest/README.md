@@ -51,6 +51,24 @@ Resposta:
 }
 ```
 
-## Referencias
+### Handling Errors
 
+Quando estamos olhando para o fluxo entre a geração do erro, manuseio do erro e analise de possiveis falahas.
+
+__O que é um error in GO__
+Olhando para o tipo `builtin error` nós podemos tomar algumas conclusões:
+
+`O erro e tipo built-in interface e uma interface convencional`
+```
+type error interface {
+  Error() string
+}
+```
+
+Um error e uma `interface` que implementa um simples metódo `Error` retornando uma string.
+
+
+
+## Referencias
+[Handling Errors - Stupid Gopher](https://medium.com/hackernoon/golang-handling-errors-gracefully-8e27f1db729f)
 [Manage Config - Felipe Dutra Tine e Silva](https://medium.com/@felipedutratine/manage-config-in-golang-to-get-variables-from-file-and-env-variables-33d876887152)
