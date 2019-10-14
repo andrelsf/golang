@@ -15,7 +15,7 @@ type ResponseStatus struct {
 
 /*
 	GET: /api/ping
-	@CURL: curl -X GET -H "Content-type: application/json" localhost:8000
+	@CURL: curl -X GET -H "Content-type: application/json" localhost:8000/api/ping
 */
 func ping(w http.ResponseWriter, r *http.Request) {
 	if r.Method == http.MethodGet {
