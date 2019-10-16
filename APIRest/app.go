@@ -8,7 +8,9 @@ import (
 	"encoding/json"
 )
 
-const APP_PORT = ":8000"
+const (
+	APP_PORT = ":8000"
+)
 
 type (
 	ResponseStatus struct {
@@ -58,15 +60,17 @@ func Registry(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(http.StatusOK)
 		w.Write(userJson)
 	} else {
-		resp := ResponseStatus{http.StatusNotImplemented, "Resource not Implemented"}
-        respJson, err := json.MarshalIndent(resp, "", "  ")
-        if err != nil {
-            panic(err)
-        }
-        w.Header().Set("Content-Type", "application/json")
-        w.WriteHeader(http.StatusNotImplemented)
-        w.Write(respJson)
+		ResponseResourceNotImplemented(w)
 	}
+}
+
+/*
+	TODO
+	GET: /api/users - Get all Users
+	@CURL: curl -X GET -H "Content-type: application/json" localhost:8000/api/users
+*/
+func Users(w http.ResponseWriter, r *http.Request) {
+	ResponseResourceNotImplemented(w)
 }
 
 /*
@@ -86,16 +90,20 @@ func Ping(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(http.StatusOK)
 		w.Write(respJson)
 	} else {
-		resp := ResponseStatus{Status: http.StatusNotImplemented, Message: "Resource not implemented"}
-		
-		respJson, err := json.MarshalIndent(resp, "", "  ")
-		if err != nil {
-			log.Fatal(err)
-		}
-		w.Header().Set("Content-Type", "application/json")
-		w.WriteHeader(http.StatusNotImplemented)
-		w.Write(respJson)
+		ResponseResourceNotImplemented(w)
 	}
+}
+
+func ResponseResourceNotImplemented(w http.ResponseWriter) {
+	resp := ResponseStatus{Status: http.StatusNotImplemented, Message: "Resource not implemented"}
+		
+	respJson, err := json.MarshalIndent(resp, "", "  ")
+	if err != nil {
+		log.Fatal(err)
+	}
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(http.StatusNotImplemented)
+	w.Write(respJson)
 }
 
 /*
@@ -112,6 +120,7 @@ func loggerMiddleware(nextHandler http.Handler) http.Handler {
 func main() {
 	mux := http.NewServeMux()
 	mux.Handle("/api/ping", loggerMiddleware(http.HandlerFunc(Ping)))
+	mux.Handle("/api/users", loggerMiddleware(http.HandlerFunc(Users)))
 	mux.Handle("/api/registry", loggerMiddleware(http.HandlerFunc(Registry)))
 	fmt.Println("Server is running on:", APP_PORT)
 	http.ListenAndServe(APP_PORT, mux)

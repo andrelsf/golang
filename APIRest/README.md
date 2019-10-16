@@ -4,7 +4,10 @@ Uma simples implementação de API Rest usando o `Muxer Pat`.
 
 ## Estrutura do projeto
 
-PROXIMA MELHORIA: `HANDLER LOGS`
+__TODO__:
+* `DB Connection SQLite and MySQL` 
+* `HANDLER ERRORS`
+* ``
 
 ### Resource PING
 
