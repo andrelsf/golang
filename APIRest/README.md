@@ -4,11 +4,15 @@ Uma simples implementação de API Rest usando o `Muxer Pat`.
 
 ## Estrutura do projeto
 
+* `Models`: Esta camada armazena todos os modelos (`struct`) e usado por todas as outras camadas.
+* `Repository`: Respository esta responsavel pelo trabalho de relacionar com a database como querying, inserting/sorting ou deleting.
+* 
+
 __TODO__:
 * `DB Connection SQLite and MySQL` 
 * `HANDLER ERRORS`
 * ``
-
+ 
 ### Resource PING
 
 Endpoint teste.
